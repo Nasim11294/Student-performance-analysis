@@ -199,8 +199,139 @@
                 min-width: 400px;
             }
         }
+
+        .student-info-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 25px auto;
+    background: #ffffff;
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.student-info-container h2 {
+    text-align: center;
+    color: #2d6cdf;
+    margin-bottom: 20px;
+}
+
+.student-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.student-info-item {
+    background: #f7f9fc;
+    border: 1px solid #e1e5eb;
+    border-radius: 10px;
+    padding: 12px 15px;
+}
+
+.student-info-item .label {
+    display: block;
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.student-info-item .value {
+    display: block;
+    color: #222;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .student-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% if messages %}
+    {% for message in messages %}
+        <div id="messagePopup" class="message-popup-overlay">
+            <div class="message-popup">
+                <div class="message-popup-icon">!</div>
+
+                <h3>Sorry!</h3>
+
+                <p>{{ message }}</p>
+
+                <button onclick="closeMessagePopup()">
+                    OK
+                </button>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<style>
+.message-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.message-popup {
+    background: white;
+    width: 350px;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.message-popup-icon {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #f1f1f1;
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 55px;
+}
+
+.message-popup h3 {
+    margin-bottom: 10px;
+}
+
+.message-popup p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.message-popup button {
+    padding: 9px 28px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.message-popup button:hover {
+    opacity: 0.85;
+}
 </style>
 
+<script>
+function closeMessagePopup() {
+    const popup = document.getElementById("messagePopup");
+
+    if (popup) {
+        popup.style.display = "none";
+    }
+}
+</script>
 {% endblock style %}
 {% block body %}
 <nav>
@@ -242,6 +373,49 @@
         <button type="submit" name="form_type" value="search">Search</button>
     </form>
 </div>
+{% if student %}
+
+<div class="student-info-container">
+
+    <h2>Student Details</h2>
+
+    <div class="student-info-grid">
+
+        <div class="student-info-item">
+            <span class="label">Student Name</span>
+            <span class="value">{{ student.name }}</span>
+        </div>
+
+        <div class="student-info-item">
+            <span class="label">Roll No.</span>
+            <span class="value">{{ student.rollno }}</span>
+        </div>
+
+        <div class="student-info-item">
+            <span class="label">Registration No.</span>
+            <span class="value">{{ student.regno }}</span>
+        </div>
+
+        <div class="student-info-item">
+            <span class="label">Course</span>
+            <span class="value">{{ student.course.name }}</span>
+        </div>
+
+        <div class="student-info-item">
+            <span class="label">Department</span>
+            <span class="value">{{ student.dept.name }}</span>
+        </div>
+
+        <div class="student-info-item">
+            <span class="label">Gender</span>
+            <span class="value">{{ student.gender|title }}</span>
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
 
 {% for i in semester %}
 <div class="container">

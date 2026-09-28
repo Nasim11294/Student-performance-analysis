@@ -405,14 +405,38 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="class">Class</label>
-                <select name="class" id="class">
-                    <option {% if disp %}value="{{disp.year}}"{% endif %} hidden>{% if disp %}{{disp.class}} {{class}}{% else %}Select Class{% endif %}</option>
-                    <option value="1">I {{class}}</option>
-                    <option value="2">II {{class}}</option>
-                    <option value="3">III {{class}}</option>
-                </select>
-            </div>
+    <label for="class">Class</label>
+
+    <select name="class" id="class">
+
+        <option
+            {% if disp %}
+                value="{{disp.year}}"
+            {% endif %}
+            hidden
+        >
+            {% if disp %}
+                {{disp.class}} {{class}}
+            {% else %}
+                Select Class
+            {% endif %}
+        </option>
+
+        {% if class == "MCA" %}
+
+            <option value="1">I MCA</option>
+            <option value="2">II MCA</option>
+
+        {% elif class == "BCA" %}
+
+            <option value="1">I BCA</option>
+            <option value="2">II BCA</option>
+            <option value="3">III BCA</option>
+
+        {% endif %}
+
+    </select>
+</div>
             <button type="submit" name="form_type" value="search">Search</button>
         </form>
     </div>

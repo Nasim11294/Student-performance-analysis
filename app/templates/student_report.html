@@ -1,0 +1,2981 @@
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon"
+          type="image/jpg"
+          href="{% static 'photos/College_Logo.jpg' %}">
+
+    <title>Let's Progress | Reports</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+          rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          rel="stylesheet">
+
+
+<style>
+
+/* =========================================================
+   BASIC
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+    background: #f4f7fc;
+    color: #333;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+nav {
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 25px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand img {
+    height: 45px;
+    width: auto;
+}
+
+.brand span {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: black;
+}
+
+.brand #blue {
+    color: #096afc;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-btn {
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 6px;
+    background: #fff;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.back-btn:hover {
+    background: #f2f2f2;
+    color: #007bff;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+    padding: 30px;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.page-heading {
+    margin-bottom: 25px;
+}
+
+.page-heading h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.page-heading p {
+    color: #777;
+    margin-top: 5px;
+}
+
+
+/* =========================================================
+   REPORT GRID
+========================================================= */
+
+.reports {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+
+/* =========================================================
+   REPORT CARD
+========================================================= */
+
+.report-card {
+    color: #fff;
+    padding: 25px;
+    min-height: 220px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+.report-card:hover {
+    transform: translateY(-5px);
+}
+
+.report-card i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.report-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.report-card p {
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   REPORT BUTTON
+========================================================= */
+
+.report-btn {
+    background: #fff;
+    color: #333;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.report-btn:hover {
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   COLORS
+========================================================= */
+
+.blue {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.green {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.orange {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.red {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    padding: 35px;
+}
+
+.modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90vh;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    overflow: hidden;
+    animation: popup 0.25s ease;
+}
+
+@keyframes popup {
+
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 22px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.modal-title {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.close {
+    font-size: 28px;
+    color: #777;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close:hover {
+    color: #dc2626;
+}
+
+
+/* =========================================================
+   MODAL BODY
+========================================================= */
+
+.modal-body {
+    padding: 25px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.modal-footer {
+    padding: 15px 22px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-btn {
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.print-btn {
+    background: #096afc;
+    color: #fff;
+}
+
+.close-btn {
+    background: #eee;
+    color: #333;
+}
+
+
+/* =========================================================
+   SEARCH / FILTER BOX
+========================================================= */
+
+.search-box {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.search-box label {
+    font-weight: 600;
+}
+
+.search-box select {
+    padding: 9px 12px;
+    min-width: 220px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.search-box button {
+    padding: 9px 17px;
+    border: none;
+    border-radius: 6px;
+    background: #096afc;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   INFO BOX
+========================================================= */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.info-box {
+    background: #f4f7fc;
+    padding: 14px;
+    border-radius: 8px;
+    border-left: 4px solid #096afc;
+}
+
+.info-box span {
+    display: block;
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 4px;
+}
+
+.info-box strong {
+    font-size: 15px;
+    color: #222;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    background: #096afc;
+    color: #fff;
+    padding: 11px;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+table tr:hover {
+    background: #f7f9fc;
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.pass {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.fail {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width:1000px) {
+
+    .reports {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .info-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media (max-width:600px) {
+
+    .reports {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .modal {
+        padding: 15px;
+    }
+
+    .modal-content {
+        width: 100%;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    #reportModal,
+    #reportModal * {
+        visibility: visible;
+    }
+
+    #reportModal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: white;
+        padding: 0;
+    }
+
+    .modal-content {
+        width: 100%;
+        max-width: none;
+        box-shadow: none;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #000;
+    }
+
+    .modal-footer {
+        display: none;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav>
+
+    <div class="brand">
+
+        <img src="{% static 'photos/College_Logo.jpg' %}"
+             alt="Logo">
+
+        <span id="blue">Let's </span>
+
+        <span>Progress</span>
+
+    </div>
+
+    <a href="/admin-dashboard/" class="back-btn">
+
+        <i class="bi bi-arrow-left"></i>
+
+        Back to Dashboard
+
+    </a>
+
+</nav>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<div class="container">
+
+    <div class="page-heading">
+
+        <h1>
+            <i class="fa-solid fa-chart-column"></i>
+            Reports
+        </h1>
+
+        <p>
+            Student Performance Analysis Reports
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         REPORT CARDS
+    ====================================================== -->
+
+    <div class="reports">
+
+
+        <!-- 1 -->
+
+        <div class="report-card blue">
+
+            <i class="fa-solid fa-user-graduate"></i>
+
+            <h3>
+                Student Performance
+            </h3>
+
+            <p>
+                Student-wise marks, percentage and result
+            </p>
+
+            <button class="report-btn"
+                    onclick="openReport('student_performance')">
+
+                Generate Report
+
+            </button>
+
+        </div>
+
+
+        <!-- 2 -->
+
+        <div class="report-card green">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h3>
+                Student List
+            </h3>
+
+            <p>
+                Complete student information
+            </p>
+
+            <button class="report-btn"
+                    onclick="openReport('student_list')">
+
+                Generate Report
+
+            </button>
+
+        </div>
+
+
+        <!-- 3 -->
+
+        <div class="report-card orange">
+
+            <i class="fa-solid fa-chalkboard-user"></i>
+
+            <h3>
+                Staff Report
+            </h3>
+
+            <p>
+                Staff and faculty information
+            </p>
+
+            <button class="report-btn"
+                    onclick="openReport('staff')">
+
+                Generate Report
+
+            </button>
+
+        </div>
+
+
+        <!-- 4 -->
+
+        <div class="report-card red">
+
+            <i class="fa-solid fa-book"></i>
+
+            <h3>
+                Subject Report
+            </h3>
+
+            <p>
+                Subjects, credits and assigned staff
+            </p>
+
+            <button class="report-btn"
+                    onclick="openReport('subject')">
+
+                Generate Report
+
+            </button>
+
+        </div>
+
+
+        <!-- 5 -->
+
+        <div class="report-card blue">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <h3>
+                Semester Result
+            </h3>
+
+            <p>
+                Semester-wise student results
+            </p>
+
+            <button class="report-btn"
+                    onclick="openReport('semester_result')">
+
+                Generate Report
+
+            </button>
+
+        </div>
+
+
+        <!-- 6 -->
+
+        <div class="report-card green">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <h3>
+                Subject Performance
+            </h3>
+
+            <p>
+                Subject-wise performance analysis
+            </p>
+
+            <button class="report-btn"
+                    onclick="openReport('subject_performance')">
+
+                Generate Report
+
+            </button>
+
+        </div>
+
+
+        <!-- 7 -->
+
+        <div class="report-card orange">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <h3>
+                Pass / Fail Report
+            </h3>
+
+            <p>
+                Student pass and fail analysis
+            </p>
+
+            <button class="report-btn"
+                    onclick="openReport('pass_fail')">
+
+                Generate Report
+
+            </button>
+
+        </div>
+
+
+        <!-- 8 -->
+
+        <div class="report-card red">
+
+            <i class="fa-solid fa-trophy"></i>
+
+            <h3>
+                Top Performance
+            </h3>
+
+            <p>
+                Highest performing students
+            </p>
+
+            <button class="report-btn"
+                    onclick="openReport('top_performance')">
+
+                Generate Report
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     REPORT MODAL
+========================================================= -->
+
+<div id="reportModal" class="modal">
+
+    <div class="modal-content">
+
+
+        <!-- HEADER -->
+
+        <div class="modal-header">
+
+            <div class="modal-title"
+                 id="modalTitle">
+
+                Report
+
+            </div>
+
+            <span class="close"
+                  onclick="closeReport()">
+
+                &times;
+
+            </span>
+
+        </div>
+
+
+        <!-- BODY -->
+
+        <div class="modal-body">
+
+
+            <!-- =================================================
+                 1. STUDENT PERFORMANCE
+            ================================================== -->
+
+            <div id="student_performance_report"
+                 style="display:none;">
+
+                <div class="search-box">
+
+                    <label>
+                        Select Student:
+                    </label>
+
+                    <select id="studentSelect">
+
+                        <option value="">
+                            -- Select Student --
+                        </option>
+
+                        {% for s in students %}
+
+                        <option value="{{ s.rollno }}">
+
+                            {{ s.rollno }} - {{ s.name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                    <button type="button"
+                            onclick="showStudentReport()">
+
+                        <i class="fa-solid fa-search"></i>
+                        View Report
+
+                    </button>
+
+                </div>
+
+
+                <div id="studentResult"
+                     style="display:none;">
+
+                    <div class="info-grid">
+
+                        <div class="info-box">
+
+                            <span>Student Name</span>
+
+                            <strong id="studentName"></strong>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <span>Roll Number</span>
+
+                            <strong id="studentRoll"></strong>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <span>Course</span>
+
+                            <strong id="studentCourse"></strong>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <span>Department</span>
+
+                            <strong id="studentDept"></strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                            <tr>
+
+                                <th>Semester</th>
+                                <th>Subject</th>
+                                <th>Code</th>
+                                <th>Internal</th>
+                                <th>External</th>
+                                <th>Total</th>
+
+                            </tr>
+
+                            </thead>
+
+                            <tbody id="studentMarksTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div class="info-grid"
+                         style="margin-top:20px;">
+
+                        <div class="info-box">
+
+                            <span>Total Marks</span>
+
+                            <strong id="studentTotal"></strong>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <span>Percentage</span>
+
+                            <strong id="studentPercentage"></strong>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <span>Result</span>
+
+                            <strong id="studentResultStatus"></strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 2. STUDENT LIST
+            ================================================== -->
+
+            <div id="student_list_report"
+                 style="display:none;">
+
+                <div class="search-box">
+
+                    <label>
+                        Select Course:
+                    </label>
+
+                    <select id="studentListCourse">
+
+                        <option value="">
+                            -- Select Course --
+                        </option>
+
+                        <option value="all">
+                            All Students
+                        </option>
+
+                        <option value="MCA">
+                            MCA
+                        </option>
+
+                        <option value="BCA">
+                            BCA
+                        </option>
+
+                    </select>
+
+                    <button onclick="showStudentList()">
+
+                        <i class="fa-solid fa-search"></i>
+                        View Report
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>Roll No</th>
+                            <th>Register No</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Course</th>
+                            <th>Department</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="studentListTable">
+
+                            <tr>
+
+                                <td colspan="8"
+                                    class="empty">
+
+                                    Select a course and click
+                                    View Report.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 3. STAFF REPORT
+            ================================================== -->
+
+            <div id="staff_report"
+                 style="display:none;">
+
+                <div class="search-box">
+
+                    <label>
+                        Select Course:
+                    </label>
+
+                    <select id="staffCourse">
+
+                        <option value="">
+                            -- Select Course --
+                        </option>
+
+                        <option value="all">
+                            All Staff
+                        </option>
+
+                        <option value="MCA">
+                            MCA
+                        </option>
+
+                        <option value="BCA">
+                            BCA
+                        </option>
+
+                    </select>
+
+                    <button onclick="showStaffReport()">
+
+                        <i class="fa-solid fa-search"></i>
+                        View Report
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Designation</th>
+                            <th>Department</th>
+                            <th>Course</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="staffTable">
+
+                            <tr>
+
+                                <td colspan="5"
+                                    class="empty">
+
+                                    Select a course and click
+                                    View Report.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 4. SUBJECT REPORT
+            ================================================== -->
+
+            <div id="subject_report"
+                 style="display:none;">
+
+                <div class="search-box">
+
+                    <label>
+                        Course:
+                    </label>
+
+                    <select id="subjectCourse">
+
+                        <option value="">
+                            -- Select Course --
+                        </option>
+
+                        <option value="all">
+                            All Courses
+                        </option>
+
+                        <option value="MCA">
+                            MCA
+                        </option>
+
+                        <option value="BCA">
+                            BCA
+                        </option>
+
+                    </select>
+
+
+                    <label>
+                        Semester:
+                    </label>
+
+                    <select id="subjectSemester">
+
+                        <option value="">
+                            -- Select Semester --
+                        </option>
+
+                        <option value="all">
+                            All Semesters
+                        </option>
+
+                        <option value="1">
+                            Semester 1
+                        </option>
+
+                        <option value="2">
+                            Semester 2
+                        </option>
+
+                        <option value="3">
+                            Semester 3
+                        </option>
+
+                        <option value="4">
+                            Semester 4
+                        </option>
+
+                        <option value="5">
+                            Semester 5
+                        </option>
+
+                        <option value="6">
+                            Semester 6
+                        </option>
+
+                    </select>
+
+
+                    <button onclick="showSubjectReport()">
+
+                        <i class="fa-solid fa-search"></i>
+                        View Report
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>Subject</th>
+                            <th>Code</th>
+                            <th>Semester</th>
+                            <th>Credit</th>
+                            <th>Course</th>
+                            <th>Assigned Staff</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="subjectTable">
+
+                            <tr>
+
+                                <td colspan="6"
+                                    class="empty">
+
+                                    Select filters and click
+                                    View Report.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 5. SEMESTER RESULT
+            ================================================== -->
+
+            <div id="semester_result_report"
+                 style="display:none;">
+
+                <div class="search-box">
+
+                    <label>
+                        Student:
+                    </label>
+
+                    <select id="semesterStudent">
+
+                        <option value="">
+                            -- Select Student --
+                        </option>
+
+                        {% for s in students %}
+
+                        <option value="{{ s.rollno }}">
+
+                            {{ s.rollno }} - {{ s.name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+
+                    <label>
+                        Semester:
+                    </label>
+
+                    <select id="semesterResultSem">
+
+                        <option value="">
+                            -- Select Semester --
+                        </option>
+
+                        <option value="1">
+                            Semester 1
+                        </option>
+
+                        <option value="2">
+                            Semester 2
+                        </option>
+
+                        <option value="3">
+                            Semester 3
+                        </option>
+
+                        <option value="4">
+                            Semester 4
+                        </option>
+
+                        <option value="5">
+                            Semester 5
+                        </option>
+
+                        <option value="6">
+                            Semester 6
+                        </option>
+
+                    </select>
+
+
+                    <button onclick="showSemesterResult()">
+
+                        <i class="fa-solid fa-search"></i>
+                        View Result
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>Semester</th>
+                            <th>Roll No</th>
+                            <th>Student</th>
+                            <th>Subject</th>
+                            <th>Internal</th>
+                            <th>External</th>
+                            <th>Total</th>
+                            <th>Result</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="semesterResultTable">
+
+                            <tr>
+
+                                <td colspan="8"
+                                    class="empty">
+
+                                    Select student and semester.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 6. SUBJECT PERFORMANCE
+            ================================================== -->
+
+            <div id="subject_performance_report"
+                 style="display:none;">
+
+                <div class="search-box">
+
+                    <label>
+                        Select Subject:
+                    </label>
+
+                    <select id="performanceSubject">
+
+                        <option value="">
+                            -- Select Subject --
+                        </option>
+
+                        {% for s in subjects %}
+
+                        <option value="{{ s.id }}">
+
+                            {{ s.code }} - {{ s.name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+
+                    <button onclick="showSubjectPerformance()">
+
+                        <i class="fa-solid fa-search"></i>
+                        View Report
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>Subject</th>
+                            <th>Code</th>
+                            <th>Student</th>
+                            <th>Roll No</th>
+                            <th>Semester</th>
+                            <th>Internal</th>
+                            <th>External</th>
+                            <th>Total</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="subjectPerformanceTable">
+
+                            <tr>
+
+                                <td colspan="8"
+                                    class="empty">
+
+                                    Select a subject and click
+                                    View Report.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 7. PASS / FAIL
+            ================================================== -->
+
+            <div id="pass_fail_report"
+                 style="display:none;">
+
+                <div class="search-box">
+
+                    <label>
+                        Course:
+                    </label>
+
+                    <select id="passFailCourse">
+
+                        <option value="">
+                            -- Select Course --
+                        </option>
+
+                        <option value="all">
+                            All Courses
+                        </option>
+
+                        <option value="MCA">
+                            MCA
+                        </option>
+
+                        <option value="BCA">
+                            BCA
+                        </option>
+
+                    </select>
+
+
+                    <label>
+                        Semester:
+                    </label>
+
+                    <select id="passFailSemester">
+
+                        <option value="">
+                            -- Select Semester --
+                        </option>
+
+                        <option value="all">
+                            All Semesters
+                        </option>
+
+                        <option value="1">
+                            Semester 1
+                        </option>
+
+                        <option value="2">
+                            Semester 2
+                        </option>
+
+                        <option value="3">
+                            Semester 3
+                        </option>
+
+                        <option value="4">
+                            Semester 4
+                        </option>
+
+                        <option value="5">
+                            Semester 5
+                        </option>
+
+                        <option value="6">
+                            Semester 6
+                        </option>
+
+                    </select>
+
+
+                    <button onclick="showPassFail()">
+
+                        <i class="fa-solid fa-search"></i>
+                        View Report
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>Roll No</th>
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Subject</th>
+                            <th>Semester</th>
+                            <th>Total Marks</th>
+                            <th>Result</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="passFailTable">
+
+                            <tr>
+
+                                <td colspan="7"
+                                    class="empty">
+
+                                    Select filters and click
+                                    View Report.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 8. TOP PERFORMANCE
+            ================================================== -->
+
+            <div id="top_performance_report"
+                 style="display:none;">
+
+                <div class="search-box">
+
+                    <label>
+                        Course:
+                    </label>
+
+                    <select id="topPerformanceCourse">
+
+                        <option value="">
+                            -- Select Course --
+                        </option>
+
+                        <option value="all">
+                            All Courses
+                        </option>
+
+                        <option value="MCA">
+                            MCA
+                        </option>
+
+                        <option value="BCA">
+                            BCA
+                        </option>
+
+                    </select>
+
+
+                    <label>
+                        Semester:
+                    </label>
+
+                    <select id="topPerformanceSemester">
+
+                        <option value="">
+                            -- Select Semester --
+                        </option>
+
+                        <option value="all">
+                            All Semesters
+                        </option>
+
+                        <option value="1">
+                            Semester 1
+                        </option>
+
+                        <option value="2">
+                            Semester 2
+                        </option>
+
+                        <option value="3">
+                            Semester 3
+                        </option>
+
+                        <option value="4">
+                            Semester 4
+                        </option>
+
+                        <option value="5">
+                            Semester 5
+                        </option>
+
+                        <option value="6">
+                            Semester 6
+                        </option>
+
+                    </select>
+
+
+                    <button onclick="showTopPerformance()">
+
+                        <i class="fa-solid fa-search"></i>
+                        View Report
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>Rank</th>
+                            <th>Student</th>
+                            <th>Roll No</th>
+                            <th>Course</th>
+                            <th>Semester</th>
+                            <th>Total Marks</th>
+                            <th>Percentage</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody id="topPerformanceTable">
+
+                            <tr>
+
+                                <td colspan="7"
+                                    class="empty">
+
+                                    Select filters and click
+                                    View Report.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="modal-footer">
+
+            <button class="modal-btn print-btn"
+                    onclick="window.print()">
+
+                <i class="fa-solid fa-print"></i>
+
+                Print Report
+
+            </button>
+
+
+            <button class="modal-btn close-btn"
+                    onclick="closeReport()">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     DATA FROM DJANGO
+========================================================= -->
+
+<script>
+
+/* =========================================================
+   STUDENT DATA
+========================================================= */
+
+const studentsData = [
+
+    {% for s in students %}
+
+    {
+        rollno: "{{ s.rollno }}",
+        name: "{{ s.name|escapejs }}",
+        regno: "{{ s.regno|escapejs }}",
+        gender: "{{ s.gender|escapejs }}",
+        course: "{{ s.course.name|escapejs }}",
+        dept: "{{ s.dept.name|escapejs }}",
+        email: "{{ s.email|escapejs }}",
+        phone: "{{ s.phone|escapejs }}"
+    },
+
+    {% endfor %}
+
+];
+
+
+/* =========================================================
+   STAFF DATA
+========================================================= */
+
+const staffData = [
+
+    {% for s in staff_list %}
+
+    {
+        name: "{{ s.name|escapejs }}",
+        email: "{{ s.email|escapejs }}",
+        designation: "{{ s.designation|escapejs }}",
+        dept: "{{ s.dept.name|escapejs }}",
+        course: "{{ s.course.name|escapejs }}"
+    },
+
+    {% endfor %}
+
+];
+
+
+/* =========================================================
+   SUBJECT DATA
+========================================================= */
+
+const subjectsData = [
+
+    {% for s in subjects %}
+
+    {
+        id: "{{ s.id }}",
+        name: "{{ s.name|escapejs }}",
+        code: "{{ s.code|escapejs }}",
+        semester: "{{ s.semester }}",
+        credit: "{{ s.credit }}",
+        course: "{{ s.course.name|escapejs }}",
+
+        {% if s.staff %}
+        staff: "{{ s.staff.name|escapejs }}"
+        {% else %}
+        staff: "Not Assigned"
+        {% endif %}
+    },
+
+    {% endfor %}
+
+];
+
+
+/* =========================================================
+   MARKS DATA
+========================================================= */
+
+const marksData = [
+
+    {% for m in marks %}
+
+    {
+        rollno: "{{ m.stu.rollno }}",
+        student: "{{ m.stu.name|escapejs }}",
+        course: "{{ m.stu.course.name|escapejs }}",
+        subjectId: "{{ m.sub.id }}",
+        subject: "{{ m.sub.name|escapejs }}",
+        code: "{{ m.sub.code|escapejs }}",
+        sem: "{{ m.sem }}",
+        internal: Number("{{ m.internal|default:0 }}"),
+        external: Number("{{ m.external|default:0 }}")
+    },
+
+    {% endfor %}
+
+];
+
+</script>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+/* =========================================================
+   OPEN REPORT
+========================================================= */
+
+function openReport(reportType) {
+
+    const modal =
+        document.getElementById("reportModal");
+
+    const title =
+        document.getElementById("modalTitle");
+
+
+    const reports =
+        document.querySelectorAll(
+            ".modal-body > div"
+        );
+
+
+    reports.forEach(function(report) {
+
+        report.style.display = "none";
+
+    });
+
+
+    const titles = {
+
+        student_performance:
+            '<i class="fa-solid fa-user-graduate"></i> Student Performance Report',
+
+        student_list:
+            '<i class="fa-solid fa-users"></i> Student List Report',
+
+        staff:
+            '<i class="fa-solid fa-chalkboard-user"></i> Staff Report',
+
+        subject:
+            '<i class="fa-solid fa-book"></i> Subject Report',
+
+        semester_result:
+            '<i class="fa-solid fa-graduation-cap"></i> Semester Result Report',
+
+        subject_performance:
+            '<i class="fa-solid fa-chart-line"></i> Subject Performance Report',
+
+        pass_fail:
+            '<i class="fa-solid fa-circle-check"></i> Pass / Fail Report',
+
+        top_performance:
+            '<i class="fa-solid fa-trophy"></i> Top Performance Report'
+    };
+
+
+    title.innerHTML =
+        titles[reportType];
+
+
+    const selectedReport =
+        document.getElementById(
+            reportType + "_report"
+        );
+
+
+    if (selectedReport) {
+
+        selectedReport.style.display =
+            "block";
+
+    }
+
+
+    modal.style.display = "flex";
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+/* =========================================================
+   CLOSE REPORT
+========================================================= */
+
+function closeReport() {
+
+    document.getElementById(
+        "reportModal"
+    ).style.display = "none";
+
+    document.body.style.overflow =
+        "auto";
+}
+
+
+/* =========================================================
+   CLICK OUTSIDE MODAL
+========================================================= */
+
+window.onclick = function(event) {
+
+    const modal =
+        document.getElementById(
+            "reportModal"
+        );
+
+    if (event.target === modal) {
+
+        closeReport();
+
+    }
+};
+
+
+/* =========================================================
+   1. STUDENT PERFORMANCE
+========================================================= */
+
+function showStudentReport() {
+
+    const rollno =
+        document.getElementById(
+            "studentSelect"
+        ).value;
+
+
+    if (!rollno) {
+
+        alert(
+            "Please select a student."
+        );
+
+        return;
+    }
+
+
+    const student =
+        studentsData.find(
+            s => s.rollno == rollno
+        );
+
+
+    if (!student) {
+
+        return;
+    }
+
+
+    document.getElementById(
+        "studentName"
+    ).innerText =
+        student.name;
+
+
+    document.getElementById(
+        "studentRoll"
+    ).innerText =
+        student.rollno;
+
+
+    document.getElementById(
+        "studentCourse"
+    ).innerText =
+        student.course;
+
+
+    document.getElementById(
+        "studentDept"
+    ).innerText =
+        student.dept;
+
+
+    const studentMarks =
+        marksData.filter(
+            m => m.rollno == rollno
+        );
+
+
+    const table =
+        document.getElementById(
+            "studentMarksTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    let total = 0;
+
+
+    if (studentMarks.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="6"
+                    class="empty">
+                    No marks available.
+                </td>
+            </tr>
+        `;
+
+    } else {
+
+        studentMarks.forEach(function(m) {
+
+            const subjectTotal =
+                Number(m.internal) +
+                Number(m.external);
+
+
+            total += subjectTotal;
+
+
+            table.innerHTML += `
+
+                <tr>
+
+                    <td>${m.sem}</td>
+
+                    <td>${m.subject}</td>
+
+                    <td>${m.code}</td>
+
+                    <td>${m.internal}</td>
+
+                    <td>${m.external}</td>
+
+                    <td>${subjectTotal}</td>
+
+                </tr>
+            `;
+        });
+    }
+
+
+    document.getElementById(
+        "studentTotal"
+    ).innerText =
+        total;
+
+
+    let percentage = 0;
+
+
+    if (studentMarks.length > 0) {
+
+        percentage =
+            (
+                total /
+                (studentMarks.length * 100)
+            ) * 100;
+    }
+
+
+    percentage =
+        percentage.toFixed(2);
+
+
+    document.getElementById(
+        "studentPercentage"
+    ).innerText =
+        percentage + "%";
+
+
+    const result =
+        Number(percentage) >= 40
+            ? "Pass"
+            : "Fail";
+
+
+    document.getElementById(
+        "studentResultStatus"
+    ).innerHTML =
+
+        result === "Pass"
+
+        ?
+
+        '<span class="pass">Pass</span>'
+
+        :
+
+        '<span class="fail">Fail</span>';
+
+
+    document.getElementById(
+        "studentResult"
+    ).style.display =
+        "block";
+}
+
+
+/* =========================================================
+   2. STUDENT LIST
+========================================================= */
+
+function showStudentList() {
+
+    const course =
+        document.getElementById(
+            "studentListCourse"
+        ).value;
+
+
+    if (!course) {
+
+        alert(
+            "Please select a course."
+        );
+
+        return;
+    }
+
+
+    const filtered =
+        course === "all"
+
+        ?
+
+        studentsData
+
+        :
+
+        studentsData.filter(
+            s => s.course === course
+        );
+
+
+    const table =
+        document.getElementById(
+            "studentListTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="8"
+                    class="empty">
+                    No students found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    filtered.forEach(function(s) {
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${s.rollno}</td>
+
+                <td>${s.regno}</td>
+
+                <td>${s.name}</td>
+
+                <td>${s.gender}</td>
+
+                <td>${s.course}</td>
+
+                <td>${s.dept}</td>
+
+                <td>${s.email}</td>
+
+                <td>${s.phone}</td>
+
+            </tr>
+        `;
+    });
+}
+
+
+/* =========================================================
+   3. STAFF REPORT
+========================================================= */
+
+function showStaffReport() {
+
+    const course =
+        document.getElementById(
+            "staffCourse"
+        ).value;
+
+
+    if (!course) {
+
+        alert(
+            "Please select a course."
+        );
+
+        return;
+    }
+
+
+    const filtered =
+        course === "all"
+
+        ?
+
+        staffData
+
+        :
+
+        staffData.filter(
+            s => s.course === course
+        );
+
+
+    const table =
+        document.getElementById(
+            "staffTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5"
+                    class="empty">
+                    No staff found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    filtered.forEach(function(s) {
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${s.name}</td>
+
+                <td>${s.email}</td>
+
+                <td>${s.designation}</td>
+
+                <td>${s.dept}</td>
+
+                <td>${s.course}</td>
+
+            </tr>
+        `;
+    });
+}
+
+
+/* =========================================================
+   4. SUBJECT REPORT
+========================================================= */
+
+function showSubjectReport() {
+
+    const course =
+        document.getElementById(
+            "subjectCourse"
+        ).value;
+
+
+    const semester =
+        document.getElementById(
+            "subjectSemester"
+        ).value;
+
+
+    if (!course || !semester) {
+
+        alert(
+            "Please select Course and Semester."
+        );
+
+        return;
+    }
+
+
+    let filtered =
+        subjectsData;
+
+
+    if (course !== "all") {
+
+        filtered =
+            filtered.filter(
+                s => s.course === course
+            );
+    }
+
+
+    if (semester !== "all") {
+
+        filtered =
+            filtered.filter(
+                s => s.semester == semester
+            );
+    }
+
+
+    const table =
+        document.getElementById(
+            "subjectTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="6"
+                    class="empty">
+                    No subjects found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    filtered.forEach(function(s) {
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${s.name}</td>
+
+                <td>${s.code}</td>
+
+                <td>${s.semester}</td>
+
+                <td>${s.credit}</td>
+
+                <td>${s.course}</td>
+
+                <td>${s.staff}</td>
+
+            </tr>
+        `;
+    });
+}
+
+
+/* =========================================================
+   5. SEMESTER RESULT
+========================================================= */
+
+function showSemesterResult() {
+
+    const rollno =
+        document.getElementById(
+            "semesterStudent"
+        ).value;
+
+
+    const semester =
+        document.getElementById(
+            "semesterResultSem"
+        ).value;
+
+
+    if (!rollno || !semester) {
+
+        alert(
+            "Please select Student and Semester."
+        );
+
+        return;
+    }
+
+
+    const filtered =
+        marksData.filter(
+
+            m =>
+
+                m.rollno == rollno &&
+                m.sem == semester
+
+        );
+
+
+    const table =
+        document.getElementById(
+            "semesterResultTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="8"
+                    class="empty">
+                    No result data available
+                    for this student and semester.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    filtered.forEach(function(m) {
+
+        const total =
+            Number(m.internal) +
+            Number(m.external);
+
+
+        const result =
+            total >= 40
+                ? "Pass"
+                : "Fail";
+
+
+        const resultHTML =
+            result === "Pass"
+
+            ?
+
+            '<span class="pass">Pass</span>'
+
+            :
+
+            '<span class="fail">Fail</span>';
+
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${m.sem}</td>
+
+                <td>${m.rollno}</td>
+
+                <td>${m.student}</td>
+
+                <td>${m.subject}</td>
+
+                <td>${m.internal}</td>
+
+                <td>${m.external}</td>
+
+                <td>${total}</td>
+
+                <td>${resultHTML}</td>
+
+            </tr>
+        `;
+    });
+}
+
+
+/* =========================================================
+   6. SUBJECT PERFORMANCE
+========================================================= */
+
+function showSubjectPerformance() {
+
+    const subjectId =
+        document.getElementById(
+            "performanceSubject"
+        ).value;
+
+
+    if (!subjectId) {
+
+        alert(
+            "Please select a subject."
+        );
+
+        return;
+    }
+
+
+    const filtered =
+        marksData.filter(
+            m => m.subjectId == subjectId
+        );
+
+
+    const table =
+        document.getElementById(
+            "subjectPerformanceTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="8"
+                    class="empty">
+                    No performance data found
+                    for this subject.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    filtered.forEach(function(m) {
+
+        const total =
+            Number(m.internal) +
+            Number(m.external);
+
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${m.subject}</td>
+
+                <td>${m.code}</td>
+
+                <td>${m.student}</td>
+
+                <td>${m.rollno}</td>
+
+                <td>${m.sem}</td>
+
+                <td>${m.internal}</td>
+
+                <td>${m.external}</td>
+
+                <td>${total}</td>
+
+            </tr>
+        `;
+    });
+}
+
+
+/* =========================================================
+   7. PASS / FAIL REPORT
+========================================================= */
+
+function showPassFail() {
+
+    const course =
+        document.getElementById(
+            "passFailCourse"
+        ).value;
+
+
+    const semester =
+        document.getElementById(
+            "passFailSemester"
+        ).value;
+
+
+    if (!course || !semester) {
+
+        alert(
+            "Please select Course and Semester."
+        );
+
+        return;
+    }
+
+
+    let filtered =
+        marksData;
+
+
+    if (course !== "all") {
+
+        filtered =
+            filtered.filter(
+                m => m.course === course
+            );
+    }
+
+
+    if (semester !== "all") {
+
+        filtered =
+            filtered.filter(
+                m => m.sem == semester
+            );
+    }
+
+
+    const table =
+        document.getElementById(
+            "passFailTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="7"
+                    class="empty">
+                    No result data found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    filtered.forEach(function(m) {
+
+        const total =
+            Number(m.internal) +
+            Number(m.external);
+
+
+        const result =
+            total >= 40
+                ? "Pass"
+                : "Fail";
+
+
+        const resultHTML =
+            result === "Pass"
+
+            ?
+
+            '<span class="pass">Pass</span>'
+
+            :
+
+            '<span class="fail">Fail</span>';
+
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${m.rollno}</td>
+
+                <td>${m.student}</td>
+
+                <td>${m.course}</td>
+
+                <td>${m.subject}</td>
+
+                <td>${m.sem}</td>
+
+                <td>${total}</td>
+
+                <td>${resultHTML}</td>
+
+            </tr>
+        `;
+    });
+}
+
+
+/* =========================================================
+   8. TOP PERFORMANCE
+========================================================= */
+
+function showTopPerformance() {
+
+    const course =
+        document.getElementById(
+            "topPerformanceCourse"
+        ).value;
+
+
+    const semester =
+        document.getElementById(
+            "topPerformanceSemester"
+        ).value;
+
+
+    if (!course || !semester) {
+
+        alert(
+            "Please select Course and Semester."
+        );
+
+        return;
+    }
+
+
+    let filtered =
+        marksData;
+
+
+    if (course !== "all") {
+
+        filtered =
+            filtered.filter(
+                m => m.course === course
+            );
+    }
+
+
+    if (semester !== "all") {
+
+        filtered =
+            filtered.filter(
+                m => m.sem == semester
+            );
+    }
+
+
+    /*
+       Student-wise total marks
+    */
+
+    const studentTotals = {};
+
+
+    filtered.forEach(function(m) {
+
+        const key =
+            m.rollno;
+
+
+        if (!studentTotals[key]) {
+
+            studentTotals[key] = {
+
+                rollno: m.rollno,
+
+                student: m.student,
+
+                course: m.course,
+
+                semester:
+                    semester === "all"
+                    ? "All"
+                    : m.sem,
+
+                total: 0,
+
+                subjects: 0
+            };
+        }
+
+
+        studentTotals[key].total +=
+            Number(m.internal) +
+            Number(m.external);
+
+
+        studentTotals[key].subjects += 1;
+    });
+
+
+    const ranking =
+        Object.values(
+            studentTotals
+        );
+
+
+    /*
+       Highest total first
+    */
+
+    ranking.sort(
+        (a,b) =>
+            b.total - a.total
+    );
+
+
+    const table =
+        document.getElementById(
+            "topPerformanceTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if (ranking.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="7"
+                    class="empty">
+                    No performance data found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    ranking.forEach(
+        function(s,index) {
+
+            const maxMarks =
+                s.subjects * 100;
+
+
+            const percentage =
+                maxMarks > 0
+
+                ?
+
+                (
+                    s.total /
+                    maxMarks
+                ) * 100
+
+                :
+
+                0;
+
+
+            table.innerHTML += `
+
+                <tr>
+
+                    <td>
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        ${s.student}
+                    </td>
+
+                    <td>
+                        ${s.rollno}
+                    </td>
+
+                    <td>
+                        ${s.course}
+                    </td>
+
+                    <td>
+                        ${s.semester}
+                    </td>
+
+                    <td>
+                        ${s.total}
+                    </td>
+
+                    <td>
+                        ${percentage.toFixed(2)}%
+                    </td>
+
+                </tr>
+            `;
+        }
+    );
+}
+
+</script>
+
+
+</body>
+
+</html>
+```

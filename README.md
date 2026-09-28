@@ -84,7 +84,6 @@ The system provides meaningful academic insights using:
 6. Students view their academic performance.
 7. The system generates performance analysis using tables and charts.
 
-## 📸 Project Preview
 
 ## 📸 Project Preview
 

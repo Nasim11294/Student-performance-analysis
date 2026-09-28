@@ -86,39 +86,59 @@ The system provides meaningful academic insights using:
 
 ## 📸 Project Preview
 
+## 📸 Project Preview
+
 <p align="center">
 
-  <img src="Project_Screenshot/Screenshot 2026-06-07 161832.png" alt="Home and Login" width="95%" />
+  <img src="Project_Screenshot/mainpage.png" alt="Main Page" width="95%" />
 
 </p>
 
 <p align="center">
 
-  <img src="Project_Screenshot/Screenshot 2026-06-07 162101.png" alt="Student Dashboard" width="95%" />
+  <img src="Project_Screenshot/admin1.png" alt="Admin Dashboard" width="95%" />
 
 </p>
 
 <p align="center">
 
-  <img src="Project_Screenshot/Screenshot 2026-06-07 163259.png" alt="Performance Analysis" width="95%" />
+  <img src="Project_Screenshot/admin2.png" alt="Admin Student Management" width="95%" />
 
 </p>
 
 <p align="center">
 
-  <img src="Project_Screenshot/Screenshot 2026-06-07 162302.png" alt="Student Performance" width="95%" />
+  <img src="Project_Screenshot/admin3.png" alt="Admin Staff Management" width="95%" />
 
 </p>
 
 <p align="center">
 
-  <img src="Project_Screenshot/Screenshot 2026-06-07 162946.png" alt="Dashboard" width="95%" />
+  <img src="Project_Screenshot/admin4.png" alt="Admin Mark Management" width="95%" />
 
 </p>
 
 <p align="center">
 
-  <img src="Project_Screenshot/Screenshot 2026-06-07 163100.png" alt="Performance Chart" width="95%" />
+  <img src="Project_Screenshot/staff1.png" alt="Staff Dashboard" width="95%" />
+
+</p>
+
+<p align="center">
+
+  <img src="Project_Screenshot/staff2.png" alt="Staff Mark Entry" width="95%" />
+
+</p>
+
+<p align="center">
+
+  <img src="Project_Screenshot/stud_img1.png" alt="Student Dashboard" width="95%" />
+
+</p>
+
+<p align="center">
+
+  <img src="Project_Screenshot/stud_img2.png" alt="Student Performance Analysis" width="95%" />
 
 </p>
 
